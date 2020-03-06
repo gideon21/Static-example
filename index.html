@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lego Mickey</title>
+  <link href="https://fonts.googleapis.com/css?family=Knewave|Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    #canvas {
+      border: 2px solid #000;
+      background: linear-gradient(to bottom right, #ff0066 0%, #66ffff 100%);
+    }
+
+    h1{
+      font-family: 'Pacifico';
+    }
+
+
+  </style>
+  <script type="text/javascript">
+    window.addEventListener('load', eventWindowLoad, false);
+
+    function eventWindowLoad() {
+      let c = document.getElementById("canvas");
+      let ctx = c.getContext("2d");
+      let xPos = c.width / 2; // Calculate x position on canvas
+      console.log();
+      let yPos = c.height / 2; // Calculate y position on canvas
+      console.log();
+      //let recWidth = 190;
+      //let recHeight = 30;
+      let radius = 0;
+
+      /*
+      /////////////////
+      // Body outline
+      function drawRect(xPos, yPos, recWidth, recHeight) {
+        ctx.beginPath();
+        ctx.rect(xPos, yPos, recWidth, recHeight);
+        ctx.strokeStyle = '#000';
+        ctx.stroke();
+      }
+      drawRect(275, 280, recWidth, recHeight);
+      */
+      ///////////
+      /// Main body
+      ctx.beginPath();
+      ctx.lineTo(313, 281); // Draw top left
+      ctx.lineTo(292, 420); // Draw bottom left
+      ctx.lineTo(462, 420); // Draw bottom right
+      ctx.lineTo(437, 281); // Draw top right
+      ctx.fillStyle = '#000';
+      ctx.strokeStyle = '#fff';
+      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();
+      ///////////
+      /// Left ear
+      ctx.beginPath();
+      ctx.arc(290, 150, 50, 0, 2 * Math.PI);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Right ear
+      ctx.beginPath();
+      ctx.arc(460, 150, 50, 0, 2 * Math.PI);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Main head
+      ctx.beginPath();
+      ctx.arc(xPos, 208, 84, 0, 2 * Math.PI);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Left eye outline 1
+      let cX = 0;
+      let cY = 0;
+
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.8, 1);
+      ctx.beginPath();
+      ctx.arc(23, -180, 55, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#ffce99';
+      ctx.fill();
+      ///////////
+      /// Right eye outline 2
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.8, 1);
+      ctx.beginPath();
+      ctx.arc(-23, -180, 55, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#ffce99';
+      ctx.fill();
+      ///////////
+      /// Mouth outline
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 0.7);
+      ctx.beginPath();
+      ctx.arc(cX, -190, 71, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#ffce99';
+      ctx.fill();
+      ///////////
+      /// Left smile
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 0.7);
+      ctx.beginPath();
+      ctx.arc(-24, -189, 54, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#ffce99';
+      ctx.fill();
+      ///////////
+      /// Right smile
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 0.7);
+      ctx.beginPath();
+      ctx.arc(24, -189, 54, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#ffce99';
+      ctx.fill();
+      ///////////
+      /// Nose outline
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 0.7);
+      ctx.beginPath();
+      ctx.arc(cX, -189, 48, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.strokeStyle = '#ffe6cc';
+      ctx.fillStyle = '#ffce99';
+      ctx.fill();
+      ctx.stroke();
+      ///////////
+      /// Nose top-outline 2
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 0.7);
+      ctx.beginPath();
+      ctx.arc(cX, -189, 48, 0, 1 * Math.PI, 1.5 * Math.PI);
+      ctx.restore();
+      ctx.strokeStyle = '#ffc180';
+      ctx.stroke();
+      ///////////
+      /// Left pupil
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.6, 1);
+      ctx.beginPath();
+      ctx.arc(38, -186, 25, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// left iris
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.5, 1);
+      ctx.beginPath();
+      ctx.arc(42, -176, 13, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// left dot
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(-21, -181, 2, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Right pupil
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.6, 1);
+      ctx.beginPath();
+      ctx.arc(-38, -186, 25, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Right iris
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.5, 1);
+      ctx.beginPath();
+      ctx.arc(-42, -176, 13, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Right dot
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(21, -181, 2, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Nose
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(cX, -160, 18, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// hip
+      ctx.beginPath();
+      ctx.rect(298, 420, 159, 20);
+      ctx.fillStyle = '#ff1a1a';
+      ctx.strokeStyle = '#000';
+      ctx.fill();
+      ctx.stroke();
+      ///////////
+      /// Zipper
+      ctx.beginPath();
+      ctx.rect(372, 440, 11, 38);
+      ctx.fillStyle = '#ff1a1a';
+      ctx.strokeStyle = '#000';
+      ctx.fill();
+      ctx.stroke();
+      ///////////
+      /// Left leg
+      ctx.beginPath();
+      ctx.rect(298, 440, 74, 55);
+      ctx.fillStyle = '#ff1a1a';
+      ctx.fill();
+      ///////////
+      /// Left polka dot
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.7, 1);
+      ctx.beginPath();
+      ctx.arc(29, 88, 15, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Left leg-bottom
+      ctx.beginPath();
+      ctx.rect(298, 495, 74, 40);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Left foot
+      ctx.beginPath();
+      ctx.rect(298, 535, 74, 30);
+      ctx.fillStyle = '#e6e600';
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 4;
+      ctx.fill();
+      ctx.stroke();
+      ///////////
+      /// Right leg
+      ctx.beginPath();
+      ctx.rect(383, 440, 74, 55);
+      ctx.fillStyle = '#ff1a1a';
+      ctx.fill();
+      ///////////
+      /// Right polka dot
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(-0.7, 1);
+      ctx.beginPath();
+      ctx.arc(-35, 88, 15, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Right leg-bottom
+      ctx.beginPath();
+      ctx.rect(383, 495, 74, 40);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Right foot
+      ctx.beginPath();
+      ctx.rect(383, 535, 74, 30);
+      ctx.fillStyle = '#e6e600';
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 4;
+      ctx.fill();
+      ctx.stroke();
+      ///////////
+      /// Left shoulder
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(-68, -70, 15, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.lineWidth = 1;
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Right shoulder
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(68, -70, 15, 0, 2 * Math.PI, false);
+      ctx.restore();
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Left arm
+      ctx.beginPath();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(25 * Math.PI / 180);
+      ctx.rect(-106, -33, 33, 65);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Right arm
+      ctx.beginPath();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(128 * Math.PI / 180);
+      ctx.rect(-172, 491, 33, 65);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Left forearm
+      ctx.beginPath();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(35 * Math.PI / 180);
+      ctx.rect(-196, 338, 33, 40);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Right forearm
+      ctx.beginPath();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(162 * Math.PI / 180);
+      ctx.rect(697, 202, 33, 40);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+      ///////////
+      /// Left wrist
+      ctx.beginPath();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(197 * Math.PI / 180);
+      ctx.rect(-96, 190, 22, 13);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Right wrist
+      ctx.beginPath();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(162 * Math.PI / 180);
+      ctx.rect(571, 345, 22, 13);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ///////////
+      /// Left hand
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(70 * Math.PI / 180);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(-41, -16, 15, 0, 0.4 * Math.PI, 0.8 * Math.PI);
+      ctx.restore();
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = '#fff';
+      ctx.stroke();
+      ///////////
+      /// Right hand
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(60 * Math.PI / 180);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(102, -180, 15, 0, 0.4 * Math.PI, 0.8 * Math.PI);
+      ctx.restore();
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = '#fff';
+      ctx.stroke();
+      ///////////
+      /// Left dimple
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(10 * Math.PI / 180);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(48, -225, 7, 0, 0.9 * Math.PI, 0.8 * Math.PI);
+      ctx.restore();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#ffdab3';
+      ctx.stroke();
+      ///////////
+      /// Right dimple
+      ctx.save();
+      ctx.translate(c.width / 2, c.height / 2);
+      ctx.rotate(45 * Math.PI / 180);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      ctx.arc(-5, -268, 7, 0, 0.9 * Math.PI, 0.8 * Math.PI);
+      ctx.restore();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#ffdab3';
+      ctx.stroke();
+
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Lego Mickey Mouse</h1>
+  <canvas id="canvas" width="750" height="750"></canvas>
+</body>
+
+</html>
